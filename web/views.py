@@ -6,5 +6,5 @@ class Index(View):
     """Test"""
 
     def get(self, request):
-        """'TEst view"""
+        """Test view"""
         return render(request, "base.html", {})
