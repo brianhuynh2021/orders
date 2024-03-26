@@ -22,6 +22,8 @@ Django==4.2.11
 django-browser-reload==1.12.1
 django-tailwind==3.6.0
 djangorestframework==3.14.0
+djangorestframework-jwt==1.11.0
+djangorestframework-simplejwt==5.3.1
 filelock==3.13.1
 hyperlink==21.0.0
 identify==2.5.35
@@ -42,8 +44,10 @@ pyasn1==0.5.1
 pyasn1-modules==0.3.0
 pycparser==2.21
 Pygments==2.17.2
+PyJWT==1.7.1
 pyOpenSSL==24.1.0
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 python-slugify==8.0.4
 pytz==2024.1
 PyYAML==6.0.1
