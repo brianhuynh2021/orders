@@ -38,9 +38,9 @@ class OrderConsumer(WebsocketConsumer):
             # If the token is missing or invalid, close the connection
             self.close()
 
-    async def disconnect(self, close_code):
-        await self.send(text_data=json.dumps({"message": "Disconnected"}))
-        await self.close()
+    def disconnect(self, close_code):
+        self.send(text_data=json.dumps({"message": "Disconnected"}))
+        self.close()
 
-    async def receive(self, text_data):
-        await self.send(text_data=json.dumps({"message": "Hello world!"}))
+    def receive(self, text_data):
+        self.send(text_data=json.dumps({"message": "Hello world!"}))
