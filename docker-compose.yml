@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     build: .
-    command: gunicorn --bind 0.0.0.0:8000 order.wsgi
+    command: gunicorn --bind 0.0.0.0:8000 order.asgi
     volumes:
       - .:/app
     ports:
