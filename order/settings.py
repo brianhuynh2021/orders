@@ -15,13 +15,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-a8^0&jmjt*h5oi*n703tizbsml4!ts*w7kdsvl81_ofrv6t#&*"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django_secret_key")
 # SECRET_KEY = os.getenv('JWT_SECRET_KEY') # this is only for production environment
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv("DJANGO_DEBUG", "False") == "True" else False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOST", "").split(",")
 
+CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
 
 # Application definition
 
@@ -154,5 +155,3 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
-
-CSRF_TRUSTED_ORIGINS = ["*"]
