@@ -76,7 +76,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "order.wsgi.application"
 ASGI_APPLICATION = "order.asgi.application"
 
 # Database
