@@ -1,22 +1,18 @@
-# Use an official Python runtime as the base image
-FROM python:3.10
+FROM nikolaik/python-nodejs:python3.12-nodejs21-slim
 
-# Set the working directory in the container
+# set work directory
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Copy the current directory contents into the container at /app/
-COPY . /app/
-
-# Migrate DB
-RUN python manage.py migrate
-# Collect static files
+# install dependencies
+RUN pip install --upgrade pip
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+# install node_modules for tailwind app
+RUN python manage.py tailwind install
+RUN python manage.py tailwind build
 RUN python manage.py collectstatic --noinput
-# Port to expose
-EXPOSE 8000
-
-# Command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "order.wsgi:application"]
