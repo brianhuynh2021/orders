@@ -154,3 +154,17 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [
+                (
+                    os.getenv("CHANNEL_REDIS_HOST", "127.0.0.1"),
+                    os.getenv("CHANNEL_REDIS_PORT", 6379),
+                )
+            ],
+        },
+    },
+}
