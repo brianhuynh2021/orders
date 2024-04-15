@@ -12,9 +12,10 @@ services:
       - ./.env
     depends_on:
       - channel_redis
+      - db
     restart: 'on-failure'
   nginx:
-    image: nginx:latest
+    image: 'nginx:latest'
     ports:
       - '80:80'
     volumes:
@@ -25,10 +26,29 @@ services:
       - app
     restart: 'on-failure'
   channel_redis:
-    image: redis:latest
+    image: 'redis:latest'
     ports:
       - '6379:6379'
     restart: 'on-failure'
+  db:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: 'on-failure'
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
 volumes:
   staticfiles:
   media:
+  postgres_data:
